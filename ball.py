@@ -21,4 +21,3 @@ class Ball(Turtle):
 
     def change_y_direction(self):
         self.move_step = (self.move_step[0], self.move_step[1] * -1)
-

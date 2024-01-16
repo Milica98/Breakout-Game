@@ -16,8 +16,8 @@ ball = Ball()
 bricks = Bricks()
 
 screen.listen()
-screen.onkey(paddle.go_left, 'Left')
-screen.onkey(paddle.go_right, 'Right')
+screen.onkeypress(paddle.go_left, 'Left')
+screen.onkeypress(paddle.go_right, 'Right')
 
 game_is_on = True
 
