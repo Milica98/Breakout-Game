@@ -59,4 +59,5 @@ while not is_game_over():
     scoreboard.update_score(
         bricks.get_initial_number() - bricks.get_current_number())
 
+scoreboard.game_over()
 screen.exitonclick()
