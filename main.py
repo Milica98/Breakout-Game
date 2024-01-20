@@ -3,6 +3,7 @@ from turtle import Screen
 from bricks import Bricks
 from paddle import Paddle
 from ball import Ball
+from score_board import Scoreboard
 import time
 
 
@@ -20,7 +21,7 @@ def collision_with_edges(ball):
 
 
 def collision_with_bricks(ball, bricks):
-    for brick in bricks.bricks_array:
+    for brick in bricks.get_bricks():
         if ball.distance(brick) <= 25:
             bricks.remove(brick)
 
@@ -31,21 +32,23 @@ def collision_with_paddle(ball, paddle):
 
 
 screen = Screen()
+
 screen.setup(width=600, height=600)
 screen.title('Breakout Game')
 screen.bgcolor('black')
 screen.tracer(0)
 
-paddle = Paddle()
-ball = Ball()
+paddle = Paddle(position_x=0, position_y=-280)
+ball = Ball(position_x=0, position_y=-250)
 bricks = Bricks()
+scoreboard = Scoreboard(position_x=220, position_y=270)
 
 screen.listen()
 screen.onkeypress(paddle.go_left, 'Left')
 screen.onkeypress(paddle.go_right, 'Right')
 
 while not is_game_over():
-    time.sleep(0.05)
+    time.sleep(0.03)
 
     collision_with_edges(ball)
     collision_with_bricks(ball, bricks)
@@ -53,5 +56,7 @@ while not is_game_over():
 
     ball.move()
     screen.update()
+    scoreboard.update_score(
+        bricks.get_initial_number() - bricks.get_current_number())
 
 screen.exitonclick()
