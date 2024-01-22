@@ -13,6 +13,7 @@ class Scoreboard(Turtle):
         self.goto(position_x, position_y)
         self.hideturtle()
         self.update_scoreboard()
+        self.__start_position = (position_x, position_y)
 
     def update_scoreboard(self):
         self.write(f"Score: {self.__score}", align=ALIGNMENT, font=FONT)
@@ -24,4 +25,8 @@ class Scoreboard(Turtle):
     def update_score(self, score):
         self.__score = score
         self.clear()
+        self.update_scoreboard()
+
+    def reset(self):
+        self.goto(self.__start_position[0], self.__start_position[1])
         self.update_scoreboard()

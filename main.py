@@ -47,17 +47,24 @@ screen.listen()
 screen.onkeypress(paddle.go_left, 'Left')
 screen.onkeypress(paddle.go_right, 'Right')
 
-while not is_game_over():
-    time.sleep(0.03)
 
-    collision_with_edges(ball)
-    collision_with_bricks(ball, bricks)
-    collision_with_paddle(ball, paddle)
+while True:
+    while not is_game_over():
+        time.sleep(0.03)
 
-    ball.move()
-    screen.update()
-    scoreboard.update_score(
-        bricks.get_initial_number() - bricks.get_current_number())
+        collision_with_edges(ball)
+        collision_with_bricks(ball, bricks)
+        collision_with_paddle(ball, paddle)
 
-scoreboard.game_over()
+        ball.move()
+        screen.update()
+        scoreboard.update_score(
+            bricks.get_initial_number() - bricks.get_current_number())
+
+    scoreboard.game_over()
+    bricks.reset()
+    ball.reset()
+    paddle.reset()
+    scoreboard.reset()
+
 screen.exitonclick()

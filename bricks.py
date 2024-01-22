@@ -14,11 +14,10 @@ def get_new_brick(color, position):
 class Bricks(Turtle):
     def __init__(self):
         super().__init__()
-        self.__bricks_array = []
         self.__initialize()
 
-    def __initialize(self):
-        self.__initial_number = 13 * 4
+    def __create_bricks(self):
+        self.__initial_number += 13 * 4
         for i in range(0, 13):
             new_brick = get_new_brick('yellow', (267 + -45 * i, 100))
             self.__bricks_array.append(new_brick)
@@ -29,9 +28,19 @@ class Bricks(Turtle):
             new_brick = get_new_brick('red', (267 + -45 * i, 175))
             self.__bricks_array.append(new_brick)
 
+    def __initialize(self):
+        self.__bricks_array = []
+        self.__initial_number = 0
+        self.__create_bricks()
+
+    def reset(self):
+        self.__initialize()
+
     def remove(self, brick):
         brick.reset()
         self.__bricks_array.remove(brick)
+        if self.get_current_number() == 0:
+            self.__create_bricks()
 
     def get_initial_number(self):
         return self.__initial_number

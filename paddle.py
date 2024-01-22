@@ -9,6 +9,7 @@ class Paddle(Turtle):
         self.color('white')
         self.penup()
         self.goto(position_x, position_y)
+        self.__start_position = (position_x, position_y)
 
     def go_left(self):
         new_x = self.xcor() - 20
@@ -17,3 +18,6 @@ class Paddle(Turtle):
     def go_right(self):
         new_x = self.xcor() + 20
         self.goto(new_x, self.ycor())
+
+    def reset(self):
+        self.goto(self.__start_position[0], self.__start_position[1])
