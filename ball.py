@@ -10,6 +10,7 @@ class Ball(Turtle):
         self.penup()
         self.goto(position_x, position_y)
         self.__move_step = (10, 10)
+        self.__start_position = (position_x, position_y)
 
     def move(self):
         new_x = self.xcor() + self.__move_step[0]
@@ -21,3 +22,6 @@ class Ball(Turtle):
 
     def change_y_direction(self):
         self.__move_step = (self.__move_step[0], self.__move_step[1] * -1)
+
+    def reset(self):
+        self.goto(self.__start_position[0], self.__start_position[1])
